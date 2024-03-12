@@ -9,7 +9,7 @@ for filename in (glob.glob("../SRR/SRR_*.txt")):
 
 rule all:
     input:
-        expand("../raw_data/fastq/")
+        expand("../raw_data/fastq/{accession}/{accession}_1.fastq", accession=accessions_list)
 
 rule get_fastq_split_files:
     #input:
@@ -30,6 +30,7 @@ rule get_fastq_split_files:
 
 rule download_fastq_single:
     output:
+        output_dir=directory("../raw_data/fastq/{accession}/"),
         singleFastq = "../raw_data/fastq/{accession}/{accession}_1.fastq"
     log:
         "logs/fasterq_dump/{accession}_fasterq.log"
@@ -37,11 +38,9 @@ rule download_fastq_single:
         8
     conda:
         "envs/SRA.yml"
-    params:
-        srr_id = lambda 
     shell:
         """
-        fasterq-dump --threads {threads} --split-files {wildcards.accession} -O
+        fasterq-dump --threads {threads} --split-files {wildcards.accession} -O {output.output_dir}
         """
 
 #rule get_fastq:

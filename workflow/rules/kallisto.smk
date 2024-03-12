@@ -20,7 +20,7 @@ rule kallisto_index:
 
 rule kallisto_se:
     input:
-        fastq="raw_data/fastq/{accession}.fastq.gz",
+        fastq="raw_data/fastq/{accession}_1.fastq",
         index=rules.kallisto_index.output.index
     output:
         ouput_dir=directory("processed_data/{genome}/{accession}/")
