@@ -1,0 +1,4 @@
+WildcardError in file /prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/rules/fastq-dump.smk, line 12:
+No values given for wildcard 'accesssion'.
+  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile", line 15, in <module>
+  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/rules/fastq-dump.smk", line 12, in <module>

@@ -1,0 +1,4 @@
+stranded:
+  # take stranded into consideration for kallisto
+  rf: False
+  fr: False

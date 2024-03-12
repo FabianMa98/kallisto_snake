@@ -1,0 +1,28 @@
+import glob
+
+accessions_list=[]
+for filename in (glob.glob("./SRR/SRR_*.txt")):
+    with open(filename, 'r') as f:
+        for line in f:
+            accessions_list.append(line.strip())
+
+genomes=[]
+files=glob.glob("./raw_data/*")
+for genome in files:
+    gen = genome.split("/")[-1]
+    omit_rel = genome.replace("./", "").replace(gen, "")
+    raw_data = [omit_rel + "fastq/" + s + "/" + s + ".fastq_1" for s in accessions_list]
+    processed_genome = genome.replace("raw_data", "processed_data").replace("./", "")
+    genomes.append(processed_genome)
+for genome in genomes:
+    kallisto_list = [genome + "/" + s for s in accessions_list]
+
+configfile: "../config/config.yaml"
+
+include: "rules/fastq-dump.smk"
+#include: "rules/kallisto.smk"
+ 
+rule all:
+    input:
+        fasterq_dump = raw_data,
+        #kallisto = kallisto_list

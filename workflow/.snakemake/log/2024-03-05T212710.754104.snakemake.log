@@ -1,0 +1,4 @@
+FileNotFoundError in file /prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/rules/fastq-dump.smk, line 2:
+[Errno 2] No such file or directory: './SRR_text.txt'
+  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile", line 15, in <module>
+  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/rules/fastq-dump.smk", line 2, in <module>

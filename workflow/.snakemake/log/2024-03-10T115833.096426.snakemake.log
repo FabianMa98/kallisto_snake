@@ -1,0 +1,38 @@
+Building DAG of jobs...
+candidate job all
+    wildcards: 
+MissingInputException in rule all in file /prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile, line 24:
+Missing input files for rule all:
+    affected files:
+        raw_data/synfastq/SRR21850424
+        raw_data/synfastq/SRR18828720
+        raw_data/synfastq/SRR18828718
+        processed_data/syn/SRR17288360
+        raw_data/synfastq/SRR18828719
+        processed_data/syn/SRR18828721
+        processed_data/syn/SRR21850421
+        raw_data/synfastq/SRR18828715
+        processed_data/syn/SRR18828716
+        raw_data/synfastq/SRR18828716
+        raw_data/synfastq/SRR18828717
+        processed_data/syn/SRR18828722
+        raw_data/synfastq/SRR18828723
+        raw_data/synfastq/SRR21850421
+        processed_data/syn/SRR21850423
+        processed_data/syn/SRR18828717
+        processed_data/syn/SRR18828718
+        raw_data/synfastq/SRR18828721
+        raw_data/synfastq/SRR18828722
+        processed_data/syn/SRR18828720
+        processed_data/syn/SRR21850424
+        processed_data/syn/SRR17288357
+        processed_data/syn/SRR18828715
+        processed_data/syn/SRR18828719
+        processed_data/syn/SRR17288361
+        processed_data/syn/SRR21850422
+        raw_data/synfastq/SRR17288361
+        raw_data/synfastq/SRR17288357
+        processed_data/syn/SRR18828723
+        raw_data/synfastq/SRR21850422
+        raw_data/synfastq/SRR17288360
+        raw_data/synfastq/SRR21850423
