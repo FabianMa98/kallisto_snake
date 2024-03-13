@@ -11,7 +11,7 @@ files=glob.glob("./raw_data/*")
 for genome in files:
     gen = genome.split("/")[-1]
     omit_rel = genome.replace("./", "").replace(gen, "")
-    raw_data = [omit_rel + "fastq/" + s + "/" + s + ".fastq_1" for s in accessions_list]
+    raw_data = [omit_rel + "fastq/" + s + "/" + s + "_1.fastq" for s in accessions_list]
     processed_genome = genome.replace("raw_data", "processed_data").replace("./", "")
     genomes.append(processed_genome)
 for genome in genomes:
