@@ -1,4 +1,0 @@
-WorkflowError in file /prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/rules/kallisto.smk, line 43:
-Rule kallist_index is not defined in this workflow. Available rules: get_fastq_split_files, kallisto_index, kallisto_se
-  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile", line 16, in <module>
-  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/rules/kallisto.smk", line 43, in <module>
