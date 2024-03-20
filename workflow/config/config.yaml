@@ -2,3 +2,7 @@ stranded:
   # take stranded into consideration for kallisto
   rf: False
   fr: False
+# Download directory
+SRA_download: ""
+# Path to SraRunInfo.csv
+SraRunInfo: "/homes/fmatten/Downloads/SraRunInfo.csv"

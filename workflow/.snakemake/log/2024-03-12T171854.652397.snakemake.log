@@ -1,0 +1,3 @@
+CreateRuleException in file /prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile, line 25:
+The name all is already used by another rule
+  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile", line 25, in <module>
