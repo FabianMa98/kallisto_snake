@@ -1,0 +1,5 @@
+KeyError in file /prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile, line 63:
+'run'
+  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile", line 63, in <module>
+  File "/prj/synechocystis/Researchmodul_Fabian/conda/envs/snakemake/lib/python3.11/site-packages/pandas/core/frame.py", line 3896, in __getitem__
+  File "/prj/synechocystis/Researchmodul_Fabian/conda/envs/snakemake/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 3797, in get_loc
