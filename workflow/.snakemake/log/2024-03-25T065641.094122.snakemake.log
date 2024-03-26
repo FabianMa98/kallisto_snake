@@ -1,3 +1,0 @@
-NameError in file /prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile, line 72:
-name 'accessions_list' is not defined
-  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile", line 72, in <module>

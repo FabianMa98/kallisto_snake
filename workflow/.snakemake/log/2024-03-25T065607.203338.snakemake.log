@@ -1,3 +1,0 @@
-NameError in file /prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile, line 62:
-name 'SRA_data' is not defined
-  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile", line 62, in <module>

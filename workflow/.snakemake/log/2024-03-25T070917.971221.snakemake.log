@@ -1,4 +1,0 @@
-SyntaxError:
-Not all output, log and benchmark files of rule get_PE_fastq contain the same wildcards. This is crucial though, in order to avoid that two or more jobs write to the same file.
-  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile", line 78, in <module>
-  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/rules/fastq-dump.smk", line 86, in <module>

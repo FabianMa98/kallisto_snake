@@ -1,3 +1,0 @@
-SyntaxError in file /prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/rules/fastq-dump.smk, line 93:
-invalid syntax
-  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile", line 78, in <module>

@@ -1,3 +1,0 @@
-KeyError in file /prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile, line 61:
-'SRA'
-  File "/prj/single-bakti-seq/fmatten/playground/kallisto_snake/workflow/Snakefile", line 61, in <module>
