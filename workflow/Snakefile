@@ -64,6 +64,10 @@ SRA_SE_acc=SRA_SE["Run"].tolist()
 SRA_PE=get_PE(SRA_info)
 SRA_PE_acc=SRA_PE["Run"].tolist()
 
+combined=[]
+combined.extend(SRA_SE_acc)
+combined.extend(SRA_PE_acc)
+
 #genomes=[]
 #files=glob.glob("./raw_data/*")
 #for genome in files:
@@ -76,10 +80,12 @@ SRA_PE_acc=SRA_PE["Run"].tolist()
 #    kallisto_list = [genome + "/" + s for s in accessions_list]
 
 include: "rules/fastq-dump.smk"
-#include: "rules/kallisto.smk"
+include: "rules/kallisto.smk"
  
 rule all:
     input:
         expand("raw_data/SE/{accession}_1.fastq.gz", accession = SRA_SE_acc),
-        expand("raw_data/PE/{accession}_{PE}.fastq.gz", accession = SRA_PE_acc, PE = [1, 2])
-        #kallisto = kallisto_list
+        expand("raw_data/PE/{accession}_{PE}.fastq.gz", accession = SRA_PE_acc, PE = [1, 2]),
+        # neeed to differentiate between SE and PE for kallisto as ambiguity otherwise arises, this might just be a temporary fix
+        expand("processed_data/SE/{accession}", accession = SRA_SE_acc),
+        expand("processed_data/PE/{accession}", accession = SRA_PE_acc)

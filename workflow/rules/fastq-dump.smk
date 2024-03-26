@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
-
 # FUNCTIONS
 def get_table(SRA_run_info: Path) -> pd.DataFrame:
     """
@@ -56,6 +55,7 @@ def get_PE(SRA_data: pd.DataFrame) -> pd.DataFrame:
     """
     return SRA_data.loc[SRA_data["LibraryLayout"] == "PAIRED"]
 
+
 # VARIABLES:
 SRA_info=get_table(config["SraRunInfo"])
 SRA_SE=get_SE(SRA_info)
@@ -64,10 +64,9 @@ SRA_PE=get_PE(SRA_info)
 SRA_PE_acc=SRA_PE["Run"].tolist()
 
 
-rule get_SE_fastq:
+rule download_SE:
     output:
-        fastq="raw_data/SE/{accession}_1.fastq",
-        fastq_gz="raw_data/SE/{accession}_1.fastq.gz"
+        fastq=temp("raw_data/SE/{accession}_1.fastq")
     log:
         "logs/fasterq_dump/{accession}_fasterq.log"
     threads:
@@ -76,83 +75,51 @@ rule get_SE_fastq:
         download_folder=config["SRA_download_SE"],
         accession=lambda wildcards: SRA_SE_acc
     conda:
-        "envs/SRA.yml"
+        "../envs/SRA.yml"
     shell:
         """
         fasterq-dump --threads {threads} --split-files {params.accession} -O {params.download_folder} > {log} 2&>1
-        gzip {output.fastq} 
         """
 
-rule get_PE_fastq:
+rule gzip_SE:
+    input:
+        SE_fastq=rules.download_SE.output.fastq
     output:
-        #fastq_1=temp("raw_data/PE/{accession}_1.fastq"),
-        #fastq_1_gz="raw_data/PE/{accesion}_1.fastq.gz",
-        #fastq_2=temp("raw_data/PE/{accession}_2.fastq"),
-        #fastq_2_gz="raw_data/PE/{accession}_2.fastq.gz"
-        fastqs=temp(expand("raw_data/PE/{accession}_{PE}.fastq", PE = [1, 2], accession = SRA_PE_acc)),
-        fastqs_gz=expand("raw_data/PE/{accession}_{PE}.fastq.gz", PE = [1, 2], accession = SRA_PE_acc)
-    log:
-        "logs/fasterq_dump/{accession}_fasterq.log"
+        fastq_gz="raw_data/SE/{accession}_1.fastq.gz"
     threads:
         8
     params:
-        download_folder=config["SRA_download_SE"],
-        accession=lambda wildcards: SRA_PE_acc
-    conda:
-        "envs/SRA.yml"
+        extra=""
     shell:
         """
-        fasterq-dump --threads {threads} --split-files {params.accession} -O {params.download_folder} > {log} 2&>1
-        gzip {output.fastq_1}
-        gzip {output.fast_2} 
+        gzip {input.SE_fastq}
         """
 
+rule download_PE:
+    output:
+        fastqs=temp(expand("raw_data/PE/{accession}_{PE}.fastq", PE = [1, 2], accession = SRA_PE_acc)),
+    threads:
+        8
+    params:
+        download_folder=config["SRA_download_PE"],
+        accessions=lambda wildcards: SRA_PE_acc
+    conda:
+        "../envs/SRA.yml"
+    shell:
+        """
+        fasterq-dump --threads {threads} --split-files {params.accessions} -O {params.download_folder} > {log} 2&>1 
+        """
 
-
-#rule get_fastq_split_files:
-#    #input:
-#    #    acc=expand("{accession}", accession=accessions_list)
-#    output:
-#        output_dir=directory("../raw_data/fastq/{accession}/"),
-#        fastq="../raw_data/fastq/{accession}/{accession}.fastq.log"
-#    log:
-#        "logs/fasterq_dump/{accession}_fasterq.log"
-#    threads:
-#        8
-#    conda:
-#        "envs/SRA.yml"
-#    shell:
-#        """
-#        fasterq-dump --threads {threads} --split-files {wildcards.accession} -O {output.output_dir} > {log} 2&>1
-#        """
-
-#rule download_fastq_single:
-#    output:
-#        output_dir=directory("../raw_data/fastq/{accession}/"),
-#        singleFastq = lambda wildcards:
-#    log:
-#        "logs/fasterq_dump/{accession}_fasterq.log"
-#    threads:
-#        8
-#    conda:
-#        "envs/SRA.yml"
-#    shell:
-#        """
-#        fasterq-dump --threads {threads} --split-files {wildcards.accession} -O {output.output_dir}
-#        """
-
-#rule get_fastq:
-#    input:
-#        acc=expand("{accession}", accession=accessions_list)
-#    output:
-#        output_dir=directory("../raw_data/fastq/")
-#    log:
-#        "logs/fasterq_dump/{accession}_fasterq.log"
-#    threads:
-#        8
-#    conda:
-#        "envs/SRA.yml"
-#    shell:
-#        """
-#        fasterq-dump --threads {threads} --split-files {input.acc} -O {output.output_dir} -t tmp/ > {log} 2&>1
-#        """
+rule gzip_PE:
+    input:
+        fastqs=rules.download_PE.output.fastqs
+    output:
+        fastqs_gz=expand("raw_data/PE/{accession}_{PE}.fastq.gz", PE = [1, 2], accession = SRA_PE_acc)
+    threads:
+        8
+    params:
+        extra=""
+    shell:
+        """
+        gzip {input.fastqs}
+        """

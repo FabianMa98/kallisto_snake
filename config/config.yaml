@@ -1,15 +1,13 @@
 stranded:
   # take stranded into consideration for kallisto
-  rf:
-    command: "--rf-stranded"
-  fr:
-    command: "--fr-stranded"
+  rf: "--rf-stranded"
+  fr: "--fr-stranded"
 fragment_length: 200
 standard_deviation: 20
 # Download directory
-SRA_download_SE: "./workflow/raw_data/SE/"
-SRA_download_PE: "./workflow/raw_data/PE/"
+SRA_download_SE: raw_data/SE/
+SRA_download_PE: raw_data/PE/
 # Path to SraRunInfo.csv
 SraRunInfo: "/homes/fmatten/Downloads/SraRunInfo.csv"
 # Path to reference genome
-genome: "./workflow/raw_data/syn/GCF_000009725_1_ASM972v1_cds_from_genomic.fna" 
+genome: "raw_data/syn/GCF_000009725_1_ASM972v1_cds_from_genomic.fna" 
